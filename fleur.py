@@ -8,6 +8,10 @@ apprentissage = []
 def Main():
     f=open(r"C:\Users\rpaup\Documents\GitHub\DataScience-IA\IA3-ml_data_iris.txt",'r')
     CreateList(f)
+    print("test : ")
+    print(test)
+    print("apprentissage : ")
+    print(apprentissage)
     k = DefK()
     print(f"{k} is the most optimal number of neighbour to take for the KNN function")
 
@@ -31,16 +35,19 @@ def CreateList(f):
         data = item.split(',')
         fleur.append(dict(sl=float(data[0]), sw=float(data[1]), pl=float(data[2]), pw=float(data[3]), cl=data[4]))
     listSize = len(fleur)/3
+    print(listSize)
 
     for i in range(0, int(listSize*0.4)) :
-        test.append(fleur[i])
-        test.append(fleur[int(listSize + i)])
-        test.append(fleur[int(listSize*2 + i)])
-    
-    for i in range(int(listSize*0.4), int(listSize)):
+        print(i)
         apprentissage.append(fleur[i])
         apprentissage.append(fleur[int(listSize + i)])
         apprentissage.append(fleur[int(listSize*2 + i)])
+    
+    for i in range(int(listSize*0.4), int(listSize)):
+        print(i)
+        test.append(fleur[i])
+        test.append(fleur[int(listSize + i)])
+        test.append(fleur[int(listSize*2 + i)])
 
 def FillMatriceConf(s,v):
     x=0
@@ -60,20 +67,20 @@ def FillMatriceConf(s,v):
             y=1
         case  'Iris-setosa':
             y=0
-
     matriceConf[x][y]+=1
 
 def DefK():
     listError=dict()
-    for k in range(1,21):
-        for f in apprentissage :
+    for k in range(1,41):
+        for f in test :
             FillMatriceConf(KNN(f, k), f['cl'])
         listError[k] = countMatriceConf()
+    print(listError)
     return min(listError, key=listError.get)
 
 def countMatriceConf():
     global matriceConf
-    nbError = matriceConf[0][1] + matriceConf[0][2] +matriceConf[1][0] +matriceConf[1][2] +matriceConf[2][0] + matriceConf[2][1] 
+    nbError = matriceConf[0][1] + matriceConf[0][2] + matriceConf[1][0] + matriceConf[1][2] + matriceConf[2][0] + matriceConf[2][1] 
     matriceConf = [[0,0,0],[0,0,0],[0,0,0]]
     return nbError
 
