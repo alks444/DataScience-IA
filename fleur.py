@@ -30,9 +30,7 @@ def CreateList(f):
         item = item.replace('\n', '')
         data = item.split(',')
         fleur.append(dict(sl=float(data[0]), sw=float(data[1]), pl=float(data[2]), pw=float(data[3]), cl=data[4]))
-        print(fleur)
     listSize = len(fleur)/3
-    print(listSize)
 
     for i in range(0, int(listSize*0.2)) :
         apprentissage.append(fleur[i])
@@ -70,7 +68,6 @@ def DefK():
         for f in test :
             FillMatriceConf(KNN(f, k), f['cl'])
         listError[k] = countMatriceConf()
-    print(listError)
     return min(listError, key=listError.get)
 
 def countMatriceConf():
