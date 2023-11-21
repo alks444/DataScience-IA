@@ -6,7 +6,7 @@ test = []
 apprentissage = []
 
 def Main():
-    f=open(r"C:\Users\rpaup\Documents\GitHub\DataScience-IA\IA3-ml_data_iris.txt",'r')
+    f=open(r"C:\Users\leroy\Documents\GitHub\DataScience-IA\KNN Iris\IA3-ml_data_iris.txt",'r')
     CreateList(f)
     k = DefK()
     print(f"{k} is the most optimal number of neighbour to take for the KNN function")
