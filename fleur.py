@@ -8,10 +8,6 @@ apprentissage = []
 def Main():
     f=open(r"C:\Users\rpaup\Documents\GitHub\DataScience-IA\IA3-ml_data_iris.txt",'r')
     CreateList(f)
-    print("test : ")
-    print(test)
-    print("apprentissage : ")
-    print(apprentissage)
     k = DefK()
     print(f"{k} is the most optimal number of neighbour to take for the KNN function")
 
@@ -24,7 +20,7 @@ def KNN(flower, k):
     countFlower = dict()
     for i in range(0,k):
         if nearN[i]['cl'] in countFlower :
-              countFlower[nearN[0]['cl']] += 1
+              countFlower[nearN[i]['cl']] += 1
         else :
             countFlower[nearN[i]['cl']] = 1
     return max(countFlower, key=countFlower.get)
@@ -34,17 +30,16 @@ def CreateList(f):
         item = item.replace('\n', '')
         data = item.split(',')
         fleur.append(dict(sl=float(data[0]), sw=float(data[1]), pl=float(data[2]), pw=float(data[3]), cl=data[4]))
+        print(fleur)
     listSize = len(fleur)/3
     print(listSize)
 
-    for i in range(0, int(listSize*0.4)) :
-        print(i)
+    for i in range(0, int(listSize*0.2)) :
         apprentissage.append(fleur[i])
         apprentissage.append(fleur[int(listSize + i)])
         apprentissage.append(fleur[int(listSize*2 + i)])
     
-    for i in range(int(listSize*0.4), int(listSize)):
-        print(i)
+    for i in range(int(listSize*0.2), int(listSize)):
         test.append(fleur[i])
         test.append(fleur[int(listSize + i)])
         test.append(fleur[int(listSize*2 + i)])
@@ -71,7 +66,7 @@ def FillMatriceConf(s,v):
 
 def DefK():
     listError=dict()
-    for k in range(1,41):
+    for k in range(1,31):
         for f in test :
             FillMatriceConf(KNN(f, k), f['cl'])
         listError[k] = countMatriceConf()
